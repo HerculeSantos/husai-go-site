@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Husai Go — Mobilidade urbana e traslados executivos</title>
+<meta name="description" content="Husai Go: mobilidade urbana e traslados executivos com tarifas previsíveis, frota própria e atendimento por agendamento. Aplicativo em fase de lançamento.">
+<link rel="canonical" href="https://husaigo.com.br/">
+<meta property="og:title" content="Husai Go — Mobilidade urbana e traslados executivos">
+<meta property="og:description" content="Tarifas previsíveis, frota própria e atendimento por agendamento. Aplicativo em fase de lançamento.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://husaigo.com.br/">
+<meta name="theme-color" content="#0B0F14">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B0F14'/%3E%3Ccircle cx='32' cy='32' r='21' fill='none' stroke='%23C9A227' stroke-width='3'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#0B0F14;
+    --surface:#121821;
+    --line:#1F2833;
+    --text:#E9EDF3;
+    --muted:#9AA6B2;
+    --accent:#C9A227;
+    --accent-soft:rgba(201,162,39,.12);
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+  .wrap{width:100%;max-width:1040px;margin:0 auto;padding:0 24px}
+  header{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(11,15,20,.92);backdrop-filter:blur(8px);z-index:10}
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:72px}
+  .brand{display:flex;align-items:center;gap:12px;color:var(--text);font-weight:700;letter-spacing:.14em;font-size:15px}
+  .brand:hover{text-decoration:none}
+  .brand svg{flex:0 0 auto}
+  nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0;font-size:14.5px}
+  nav a{color:var(--muted)}
+  nav a:hover{color:var(--text);text-decoration:none}
+  @media (max-width:720px){nav{display:none}}
+
+  .hero{padding:88px 0 72px;border-bottom:1px solid var(--line);background:
+    radial-gradient(900px 380px at 78% -10%,rgba(201,162,39,.13),transparent 70%);}
+  .eyebrow{display:inline-block;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent);background:var(--accent-soft);border:1px solid rgba(201,162,39,.28);
+    padding:6px 12px;border-radius:999px;margin-bottom:24px}
+  h1{font-size:clamp(32px,5vw,52px);line-height:1.12;letter-spacing:-.02em;margin:0 0 20px;max-width:19ch}
+  .lead{font-size:clamp(17px,2vw,19px);color:var(--muted);max-width:60ch;margin:0 0 32px}
+  .cta{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+  .btn{display:inline-block;padding:14px 24px;border-radius:10px;font-weight:600;font-size:15.5px;border:1px solid var(--accent);
+    background:var(--accent);color:#0B0F14}
+  .btn:hover{filter:brightness(1.06);text-decoration:none}
+  .btn.ghost{background:transparent;color:var(--text);border-color:var(--line)}
+  .btn.ghost:hover{border-color:var(--muted)}
+  .hint{font-size:13.5px;color:var(--muted);margin:18px 0 0}
+
+  section{padding:72px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:clamp(22px,3vw,28px);letter-spacing:-.01em;margin:0 0 12px}
+  .sub{color:var(--muted);margin:0 0 34px;max-width:62ch}
+  .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+  .card h3{font-size:16.5px;margin:0 0 8px;letter-spacing:.01em}
+  .card p{margin:0;color:var(--muted);font-size:15px}
+  .card .ico{color:var(--accent);margin-bottom:14px;display:block}
+
+  ul.clean{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+  ul.clean li{display:flex;gap:12px;color:var(--muted);font-size:15.5px}
+  ul.clean li::before{content:"";flex:0 0 6px;height:6px;margin-top:9px;border-radius:50%;background:var(--accent)}
+
+  .split{display:grid;gap:40px;grid-template-columns:1.1fr .9fr;align-items:start}
+  @media (max-width:820px){.split{grid-template-columns:1fr}}
+
+  .contact-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+  .contact-card .label{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+  .contact-card .value{font-size:18px;margin:0 0 22px;word-break:break-word}
+  .contact-card .value:last-child{margin-bottom:0}
+
+  .legal{font-size:14.5px;color:var(--muted)}
+  .legal h3{font-size:15.5px;color:var(--text);margin:26px 0 8px}
+  .legal p{margin:0 0 10px}
+  .legal ul{margin:0 0 10px;padding-left:20px}
+  .legal li{margin-bottom:4px}
+
+  footer{padding:36px 0 48px;font-size:13.5px;color:var(--muted)}
+  footer .row{display:flex;flex-wrap:wrap;gap:8px 22px;justify-content:space-between;align-items:center}
+  footer a{color:var(--muted)}
+  footer a:hover{color:var(--text)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#" aria-label="Husai Go — início">
+      <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="32" r="21" fill="none" stroke="#C9A227" stroke-width="3"/>
+        <path d="M24 41V23m16 18V23M24 32h16" fill="none" stroke="#E9EDF3" stroke-width="3.2" stroke-linecap="round"/>
+      </svg>
+      HUSAI GO
+    </a>
+    <nav aria-label="Navegação principal">
+      <ul>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#diferenciais">Diferenciais</a></li>
+        <li><a href="#motoristas">Motoristas</a></li>
+        <li><a href="#suporte">Suporte</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <div class="hero">
+    <div class="wrap">
+      <span class="eyebrow">Aplicativo em fase de lançamento</span>
+      <h1>Mobilidade urbana e traslados executivos.</h1>
+      <p class="lead">
+        O Husai Go conecta passageiros e motoristas com tarifas previsíveis,
+        frota própria e atendimento por agendamento. Um braço de mobilidade do Grupo Husai.
+      </p>
+      <div class="cta">
+        <a class="btn" href="mailto:contato@husaigo.com.br?subject=Contato%20Husai%20Go">Falar com a central</a>
+        <a class="btn ghost" href="#servicos">Conhecer os serviços</a>
+      </div>
+      <p class="hint">Atendimento na região médio-norte de Mato Grosso · Cadastro de interessados aberto.</p>
+    </div>
+  </div>
+
+  <section id="servicos">
+    <div class="wrap">
+      <h2>Serviços</h2>
+      <p class="sub">Operação enxuta, previsível e focada em conforto — do giro diário na cidade ao traslado de longa distância.</p>
+      <div class="grid">
+        <div class="card">
+          <svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 16h18M5 16V9l2-4h10l2 4v7"/><circle cx="7.5" cy="18.5" r="1.6"/><circle cx="16.5" cy="18.5" r="1.6"/></svg>
+          <h3>Corridas urbanas</h3>
+          <p>Tarifas fixas por zona da cidade. Você sabe o valor antes de embarcar, sem surpresa no fim do trajeto.</p>
+        </div>
+        <div class="card">
+          <svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 19h16M6 19V8l6-4 6 4v11"/><path d="M10 19v-5h4v5"/></svg>
+          <h3>Traslados executivos</h3>
+          <p>Viagens agendadas para aeroportos e polos regionais, com carro executivo, água, Wi-Fi e pontualidade.</p>
+        </div>
+        <div class="card">
+          <svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M6 17 9 8h5l3 9M9 8h8"/></svg>
+          <h3>Mototáxi e entregas</h3>
+          <p>Duas rodas para deslocamentos rápidos e entregas locais, no mesmo aplicativo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="diferenciais">
+    <div class="wrap split">
+      <div>
+        <h2>Por que o Husai Go</h2>
+        <p class="sub">Menos intermediários, mais previsibilidade. O modelo foi desenhado para o passageiro e para quem dirige.</p>
+        <ul class="clean">
+          <li>Preço fechado por zona, definido antes da corrida.</li>
+          <li>Pagamento direto ao motorista ao final do trajeto — sem retenção no aplicativo.</li>
+          <li>Frota própria com veículos elétricos e híbridos, silenciosos e confortáveis.</li>
+          <li>Traslados com horário agendado e veículo posicionado antes do embarque.</li>
+          <li>Atendimento humano pelo WhatsApp e e-mail, com resposta rápida.</li>
+        </ul>
+      </div>
+      <div class="contact-card" id="motoristas">
+        <p class="label">Seja motorista parceiro</p>
+        <p class="value">Estamos formando a base de motoristas da primeira operação.</p>
+        <p class="label">Como participar</p>
+        <p class="value">Envie um e-mail com seu nome, cidade e tempo de habilitação. Retornamos com os próximos passos.</p>
+        <a class="btn" href="mailto:contato@husaigo.com.br?subject=Quero%20ser%20motorista%20parceiro%20Husai%20Go">Quero ser parceiro</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="suporte">
+    <div class="wrap">
+      <h2>Suporte</h2>
+      <p class="sub">Canal oficial de atendimento do aplicativo Husai Go.</p>
+      <div class="contact-card">
+        <p class="label">E-mail</p>
+        <p class="value"><a href="mailto:contato@husaigo.com.br">contato@husaigo.com.br</a></p>
+        <p class="label">Horário de atendimento</p>
+        <p class="value">Segunda a sábado, 8h às 20h (horário de Brasília)</p>
+        <p class="label">Prazo de resposta</p>
+        <p class="value">Até 2 dias úteis</p>
+        <p class="label">Exclusão de conta e dados</p>
+        <p class="value">Envie um e-mail com o assunto <strong>“Excluir conta”</strong> a partir do endereço cadastrado. A solicitação é processada em até 30 dias.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="privacidade">
+    <div class="wrap legal">
+      <h2>Política de Privacidade</h2>
+      <p>Última atualização: 25 de outubro de 2026.</p>
+      <p>Esta política se aplica ao site husaigo.com.br e ao aplicativo Husai Go, operados por Husai Tecnologia Ltda. (“Husai Go”, “nós”).</p>
+
+      <h3>1. Dados que coletamos</h3>
+      <ul>
+        <li><strong>Cadastro:</strong> nome, e-mail, telefone e CPF (para validação antifraude).</li>
+        <li><strong>Uso do serviço:</strong> origem e destino da viagem, histórico de corridas e forma de pagamento escolhida.</li>
+        <li><strong>Localização:</strong> coletada durante a corrida para conectar passageiro e motorista e calcular a tarifa.</li>
+        <li><strong>Suporte:</strong> conteúdo das mensagens que você envia aos nossos canais de atendimento.</li>
+      </ul>
+
+      <h3>2. Para que usamos</h3>
+      <ul>
+        <li>Executar o serviço de transporte e conectar passageiros e motoristas.</li>
+        <li>Calcular tarifas, emitir recibos e cumprir obrigações fiscais e legais.</li>
+        <li>Prevenir fraudes e garantir a segurança de passageiros e motoristas.</li>
+        <li>Prestar suporte e responder solicitações.</li>
+      </ul>
+
+      <h3>3. Compartilhamento</h3>
+      <p>Não vendemos dados pessoais. Compartilhamos apenas o necessário com provedores de infraestrutura e serviços usados para operar o aplicativo (por exemplo, hospedagem, envio de SMS e mapas), sempre limitados à finalidade do serviço, e com autoridades quando houver obrigação legal.</p>
+
+      <h3>4. Segurança e retenção</h3>
+      <p>Adotamos medidas técnicas e administrativas para proteger os dados. Mantemos as informações pelo tempo necessário ao funcionamento do serviço e ao cumprimento de obrigações legais; depois disso, são eliminadas ou anonimizadas.</p>
+
+      <h3>5. Seus direitos (LGPD)</h3>
+      <p>Você pode solicitar acesso, correção, portabilidade, anonimização ou exclusão dos seus dados, além de informações sobre compartilhamento. Basta escrever para o canal de suporte abaixo. Responderemos nos prazos previstos na Lei nº 13.709/2018.</p>
+
+      <h3>6. Contato do controlador</h3>
+      <p>Husai Tecnologia Ltda. — CNPJ 20.166.924/0001-70<br>
+      <a href="mailto:contato@husaigo.com.br">contato@husaigo.com.br</a></p>
+
+      <h3>7. Alterações</h3>
+      <p>Podemos atualizar esta política. A versão vigente é sempre a publicada nesta página, com a data de atualização indicada acima.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap row">
+    <span>© 2026 Husai Tecnologia Ltda. · CNPJ 20.166.924/0001-70</span>
+    <span>
+      <a href="#privacidade">Privacidade</a> ·
+      <a href="#suporte">Suporte</a> ·
+      <a href="mailto:contato@husaigo.com.br">Contato</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>
